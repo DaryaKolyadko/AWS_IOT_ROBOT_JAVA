@@ -19,11 +19,11 @@ public class RobotCallback implements MqttCallback {
 
     @Override
     public void messageArrived(String topic, MqttMessage message) throws Exception {
-        form.addLog(String.format("{%s}: message {%s}\n", topic, new String(message.getPayload())));
+        form.addLog(String.format("{%s}:message{\n%s}\n", topic, new String(message.getPayload())));
     }
 
     @Override
     public void deliveryComplete(IMqttDeliveryToken token) {
-        form.addLog("===Successfully  sent===\n");
+//        form.addLog("===Successfully sent===\n");
     }
 }

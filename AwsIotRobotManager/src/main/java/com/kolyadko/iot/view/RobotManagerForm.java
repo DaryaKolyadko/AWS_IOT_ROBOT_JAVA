@@ -37,17 +37,18 @@ public class RobotManagerForm extends JFrame {
     private JButton buttonStop;
     private JButton buttonTurnLeft;
     private JButton buttonTurnRight;
-    private JTextPane logTextPane;
     private JPanel mainPanel;
+    private JTextArea logTextArea;
     private MqttClient client;
     private AWSIotDevice device;
-    private String topic;
+    private String publishTopic;
+    private String subscribeTopic;
 
     public RobotManagerForm(String title) throws HeadlessException {
         super(title);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setContentPane(mainPanel);
-        DefaultCaret caret = (DefaultCaret) logTextPane.getCaret();
+        DefaultCaret caret = (DefaultCaret) logTextArea.getCaret();
         caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
         setSize(1200, 900);
         buttonGo.addMouseListener(new MouseAdapter() {
@@ -83,7 +84,7 @@ public class RobotManagerForm extends JFrame {
         });
     }
 
-    public void startInteraction(final String configFile, final String topic, final String qosLevel) {
+    public void startInteraction(final String configFile) {
         final JDialog dlgProgress = new JDialog(this, "Please wait...", true);
         dlgProgress.setLocationRelativeTo(null);
         JLabel lblStatus = new JLabel("Working...");
@@ -92,13 +93,13 @@ public class RobotManagerForm extends JFrame {
         dlgProgress.add(BorderLayout.NORTH, lblStatus);
         dlgProgress.add(BorderLayout.CENTER, pbProgress);
         dlgProgress.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
-        dlgProgress.pack();
+        dlgProgress.setSize(200, 80);
 
         SwingWorker<Void, Void> swingWorker = new SwingWorker<Void, Void>() {
             @Override
             protected Void doInBackground() throws Exception {
                 establishConnectionToThing(configFile);
-                establishConnectionToTopic(configFile, topic, qosLevel);
+                establishConnectionToTopic(configFile);
                 return null;
             }
 
@@ -115,10 +116,11 @@ public class RobotManagerForm extends JFrame {
         setVisible(true);
     }
 
-    private void establishConnectionToTopic(String configFile, String topic, String qosLevel) {
+    private void establishConnectionToTopic(String configFile) {
         try {
             IoTConfig config = new IoTConfig(configFile);
-            this.topic = topic;
+            publishTopic = config.get(IoTConfig.ConfigFields.AWS_IOT_PUBLISH_TOPIC_NAME);
+            subscribeTopic = config.get(IoTConfig.ConfigFields.AWS_IOT_SUBSCRIBE_TOPIC_NAME);
             SSLSocketFactory sslSocketFactory = SslUtil.getSocketFactory(
                     config.get(IoTConfig.ConfigFields.AWS_IOT_ROOT_CA_FILENAME),
                     config.get(IoTConfig.ConfigFields.AWS_IOT_CERTIFICATE_FILENAME),
@@ -131,7 +133,7 @@ public class RobotManagerForm extends JFrame {
             client = new MqttClient(serverUrl, clientId);
             client.setCallback(new RobotCallback(this));
             client.connect(options);
-            client.subscribe(topic, Integer.parseInt(qosLevel));
+            client.subscribe(subscribeTopic, Integer.parseInt(config.get(IoTConfig.ConfigFields.AWS_IOT_QOS_LEVEL)));
         } catch (Exception e) {
             error(e.getMessage());
         }
@@ -175,16 +177,15 @@ public class RobotManagerForm extends JFrame {
 
     private void publish(String message) {
         try {
-            client.publish(topic, new MqttMessage(message.getBytes()));
+            client.publish(publishTopic, new MqttMessage(message.getBytes()));
+            addLog("{" + publishTopic + "}: " + message + "\n");
         } catch (MqttException e) {
             error(e.getMessage());
         }
     }
 
     public void addLog(String log) {
-        String text = logTextPane.getText();
-        text += log;
-        logTextPane.setText(text);
+        logTextArea.append(log);
     }
 
     public static void error(String message) {

@@ -121,11 +121,10 @@
             <properties/>
             <border type="none"/>
             <children>
-              <component id="edd07" class="javax.swing.JTextPane" binding="logTextPane">
+              <component id="4827" class="javax.swing.JTextArea" binding="logTextArea">
                 <constraints/>
                 <properties>
-                  <font size="24"/>
-                  <text value=""/>
+                  <font name="Consolas" size="26"/>
                 </properties>
               </component>
             </children>

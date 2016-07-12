@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="com.kolyadko.iot.view.RobotManagerForm">
+  <grid id="28aa2" binding="mainPanel" layout-manager="BorderLayout" hgap="0" vgap="0">
+    <constraints>
+      <xy x="20" y="20" width="1070" height="858"/>
+    </constraints>
+    <properties/>
+    <border type="none"/>
+    <children>
+      <grid id="27dc6" layout-manager="GridLayoutManager" row-count="3" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
+        <constraints border-constraint="West"/>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <grid id="88dba" layout-manager="GridLayoutManager" row-count="1" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+            <margin top="0" left="0" bottom="0" right="0"/>
+            <constraints>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <grid id="d7f7" layout-manager="CardLayout" hgap="0" vgap="0">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                    <preferred-size width="183" height="49"/>
+                  </grid>
+                </constraints>
+                <properties/>
+                <border type="none"/>
+                <children>
+                  <component id="5f19c" class="javax.swing.JButton" binding="buttonTurnLeft">
+                    <constraints>
+                      <card name="Card1"/>
+                    </constraints>
+                    <properties>
+                      <background color="-15393640"/>
+                      <font size="72" style="1"/>
+                      <foreground color="-1"/>
+                      <icon value="white_arrow_alt_left.png"/>
+                      <text value=""/>
+                    </properties>
+                  </component>
+                </children>
+              </grid>
+              <grid id="5db17" layout-manager="CardLayout" hgap="0" vgap="0">
+                <constraints>
+                  <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                    <preferred-size width="193" height="49"/>
+                  </grid>
+                </constraints>
+                <properties/>
+                <border type="none"/>
+                <children>
+                  <component id="56d02" class="javax.swing.JButton" binding="buttonTurnRight">
+                    <constraints>
+                      <card name="Card1"/>
+                    </constraints>
+                    <properties>
+                      <background color="-1666778"/>
+                      <font size="72" style="1"/>
+                      <foreground color="-1"/>
+                      <icon value="white_arrow_alt_right.png"/>
+                      <text value=""/>
+                    </properties>
+                  </component>
+                </children>
+              </grid>
+            </children>
+          </grid>
+          <grid id="2d284" layout-manager="BorderLayout" hgap="0" vgap="0">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <component id="257d4" class="javax.swing.JButton" binding="buttonGo">
+                <constraints border-constraint="Center"/>
+                <properties>
+                  <background color="-11487710"/>
+                  <font size="72" style="1"/>
+                  <foreground color="-1"/>
+                  <text value="GO"/>
+                </properties>
+              </component>
+            </children>
+          </grid>
+          <grid id="cd160" layout-manager="BorderLayout" hgap="0" vgap="0">
+            <constraints>
+              <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <component id="7415c" class="javax.swing.JButton" binding="buttonStop">
+                <constraints border-constraint="Center"/>
+                <properties>
+                  <background color="-1572834"/>
+                  <enabled value="true"/>
+                  <font size="72" style="1"/>
+                  <foreground color="-1"/>
+                  <text value="STOP"/>
+                </properties>
+              </component>
+            </children>
+          </grid>
+        </children>
+      </grid>
+      <grid id="c7f6f" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
+        <constraints border-constraint="Center"/>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <scrollpane id="fe868">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <component id="edd07" class="javax.swing.JTextPane" binding="logTextPane">
+                <constraints/>
+                <properties>
+                  <font size="24"/>
+                  <text value=""/>
+                </properties>
+              </component>
+            </children>
+          </scrollpane>
+        </children>
+      </grid>
+    </children>
+  </grid>
+</form>

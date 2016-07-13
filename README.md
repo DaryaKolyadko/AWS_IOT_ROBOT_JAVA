@@ -7,6 +7,24 @@ AWS IOT Robot: Project in Java for the AWS IoT service to be used on any interne
 - Register an IoT device on the AWS IoT dashboard and generate and attach the necessary certificates and policies to it.
 - Download the client certificate, client private and the root CA certificate 
 
+Add the following dependencies to the POM file of your Maven project.
+```
+<dependency>
+    <groupId>com.amazonaws</groupId>
+    <artifactId>aws-iot-device-sdk-java</artifactId>
+    <version>1.0.0</version>
+</dependency>
+<dependency>
+    <groupId>com.googlecode.json-simple</groupId>
+    <artifactId>json-simple</artifactId>
+    <version>1.1</version>
+</dependency>
+```
+
+## Use the AWS IoT device SDK
+
+[API documentation](http://aws-iot-device-sdk-java-docs.s3-website-us-east-1.amazonaws.com)
+
 ## Config file
 
 ```
@@ -21,6 +39,14 @@ AWS_IOT_PUBLISH_TOPIC_NAME=<Topic where you will publish messages for device, e.
 AWS_IOT_SUBSCRIBE_TOPIC_NAME=<Topic where device will publish messages for you, e.g. DeviceTopic>
 AWS_IOT_QOS_LEVEL=<0|1>
 ```
+## Installing
+
+Creating the package is as simple as
+
+```
+mvn clean package
+```
+This will create an jar (Shade-Plugin) with all dependencies baked into the jar-file.
 
 ## Running
 
